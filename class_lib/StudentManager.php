@@ -56,9 +56,8 @@ class StudentManager
         $student = $this->getJSON();
         $arr = [];
         foreach ($student as $item) {
-            if ($item->name == $keyword){
-                $student = new Student($item->name, $item->email, $item->phone);
-                array_push($arr, $student);
+            if (strpos(strtolower($item->name), strtolower($keyword)) !== false || strpos(strtolower($item->email), strtolower($keyword)) !== false || strpos(strtolower($item->phone), strtolower($keyword)) !== false) {
+                array_push($arr, $item);
             }
         }
         return $arr;

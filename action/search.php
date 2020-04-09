@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $studentManager = new StudentManager("../data/data.json");
 
-    $studentManager->searchStudent($keyword);
+    $students = $studentManager->searchStudent($keyword);
 }
 ?>
 <!doctype html>
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <label for="keyword">
         <input type="text" id="keyword" name="keyword" placeholder="Search by name">
     </label>
-    <input type="submit" name="search" class="buttonSearch" value="SEARCH">
+    <input type="submit" class="buttonSearch">
 </form>
 <table class="TableList">
     <tr>
@@ -40,22 +40,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     <?php if (isset($students)): ?>
 
-        <?php if (count($student) > 0): ?>
-
             <?php foreach ($students as $index => $student): ?>
                 <tr>
                     <td><?php echo $index ?></td>
-                    <td><?php echo $student->getName() ?></td>
-                    <td><?php echo $student->getEmail() ?></td>
-                    <td><?php echo $student->getPhone() ?></td>
+                    <td><?php echo $student->name ?></td>
+                    <td><?php echo $student->email ?></td>
+                    <td><?php echo $student->phone ?></td>
                     <td><a href="../view/edit.php?index=<?php echo $index ?>" class="editBtt">Edit</a>
                         <a onclick="return confirm('Are You Sure?')"
                            href="../action/delete.php?index=<?php echo $index ?>" class="delButton">Delete</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
-
-        <?php endif; ?>
 
     <?php endif; ?>
 </table>

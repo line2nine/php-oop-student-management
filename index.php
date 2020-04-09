@@ -21,7 +21,7 @@ $students = $studentManager->getListStudent();
     <label for="keyword">
         <input type="text" id="keyword" name="keyword" placeholder="Search by name">
     </label>
-    <input type="submit" name="search" class="buttonSearch" value="SEARCH">
+    <input type="submit" class="buttonSearch">
 </form>
 <table class="TableList">
     <tr>
