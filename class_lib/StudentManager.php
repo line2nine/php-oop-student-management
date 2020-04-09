@@ -57,7 +57,8 @@ class StudentManager
         $arr = [];
         foreach ($student as $item) {
             if ($item->name == $keyword){
-                array_push($arr, $item);
+                $student = new Student($item->name, $item->email, $item->phone);
+                array_push($arr, $student);
             }
         }
         return $arr;

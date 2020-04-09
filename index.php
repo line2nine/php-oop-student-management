@@ -17,7 +17,7 @@ $students = $studentManager->getListStudent();
 </head>
 <body>
 <a href="view/add.php" class="button">Add Student</a>
-<form action="action/search.php" method="post">
+<form action="action/search.php" method="get">
     <label for="keyword">
         <input type="text" id="keyword" name="keyword" placeholder="Search by name">
     </label>
