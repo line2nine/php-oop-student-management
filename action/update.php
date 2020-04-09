@@ -16,6 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
     $student = new Student($name, $email, $phone);
     $studentManager = new StudentManager("../data/data.json");
-    $studentManager->editStudent($index, $student, $std);
+    $studentManager->editStudent($index, $std);
     header("Location: ../index.php");
 }

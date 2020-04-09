@@ -32,7 +32,7 @@ class StudentManager
         $this->saveJSON($students);
     }
 
-    public function editStudent($index, $student, $data)
+    public function editStudent($index, $data)
     {
         $students = $this->getJSON();
 //        $data = [
@@ -56,7 +56,9 @@ class StudentManager
         $student = $this->getJSON();
         $arr = [];
         foreach ($student as $item) {
-            if (strpos(strtolower($item->name), strtolower($keyword)) !== false || strpos(strtolower($item->email), strtolower($keyword)) !== false || strpos(strtolower($item->phone), strtolower($keyword)) !== false) {
+            if (strpos(strtolower($item->name), strtolower($keyword)) !== false ||
+                strpos(strtolower($item->email), strtolower($keyword)) !== false ||
+                strpos(strtolower($item->phone), strtolower($keyword)) !== false) {
                 array_push($arr, $item);
             }
         }
