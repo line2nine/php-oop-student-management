@@ -51,6 +51,18 @@ class StudentManager
         $this->saveJSON($students);
     }
 
+    public function searchStudent($keyword)
+    {
+        $student = $this->getJSON();
+        $arr = [];
+        foreach ($student as $item) {
+            if ($item->name == $keyword){
+                array_push($arr, $item);
+            }
+        }
+        return $arr;
+    }
+
     public function getStudentByIndex($index)
     {
         $arrData = $this->getJSON();

@@ -17,8 +17,12 @@ $students = $studentManager->getListStudent();
 </head>
 <body>
 <a href="view/add.php" class="button">Add Student</a>
-<label for="keyword"></label><input type="text" id="keyword" name="keyword" placeholder="Search by name">
-<a href="action/search.php" class="buttonSearch">SEARCH</a>
+<form action="action/search.php" method="post">
+    <label for="keyword">
+        <input type="text" id="keyword" name="keyword" placeholder="Search by name">
+    </label>
+    <input type="submit" name="search" class="buttonSearch" value="SEARCH">
+</form>
 <table class="TableList">
     <tr>
         <th>STT</th>
