@@ -9,8 +9,18 @@
     <title>Add Student</title>
 </head>
 <body>
-<form action="../action/create.php" method="post">
+<form action="../action/create.php" method="post" enctype="multipart/form-data">
     <table class="TableList">
+        <tr>
+            <td>Group</td>
+            <td><select name="group">
+                    <option>C0220H2</option>
+                    <option>C0120G2</option>
+                    <option>C0210J1</option>
+                    <option>C0546B3</option>
+                    <option>C0312T6</option>
+                </select></td>
+        </tr>
         <tr>
             <td>Name</td>
             <td><input type="text" name="name" class="TableList"></td>
@@ -24,8 +34,14 @@
             <td><input type="text" name="phone" class="TableList"></td>
         </tr>
         <tr>
+            <td>Image</td>
+            <td><input type="file" name="image" class="TableList"></td>
+        </tr>
+        <tr>
             <td></td>
-            <td><button type="submit" class="buttonAdd">Create</button></td>
+            <td>
+                <button type="submit" class="buttonAdd">Create</button>
+            </td>
         </tr>
     </table>
 </form>

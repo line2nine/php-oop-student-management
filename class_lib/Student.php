@@ -7,12 +7,21 @@ class Student
     protected $email;
     protected $phone;
     protected $index;
+    protected $image;
+    protected $group;
 
-    public function __construct($name, $email, $phone)
+    public function __construct($name, $email, $phone, $image, $group)
     {
         $this->name = $name;
         $this->email = $email;
         $this->phone = $phone;
+        $this->image = $image;
+        $this->group = $group;
+    }
+
+    public function getGroup()
+    {
+        return $this->group;
     }
 
     public function getName()
@@ -43,6 +52,11 @@ class Student
     public function setPhone($phone)
     {
         $this->phone = $phone;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
     }
 
     public function getIndex()

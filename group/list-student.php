@@ -1,9 +1,13 @@
 <?php
-include "class_lib/Student.php";
-include "class_lib/StudentManager.php";
+include "../class_lib/Student.php";
+include "../class_lib/StudentManager.php";
+include "../class_lib/GroupManager.php";
 
-$studentManager = new StudentManager("data/data.json");
-$students = $studentManager->getListStudent();
+$groupName = $_REQUEST['group'];
+$studentManager = new StudentManager("../data/data.json");
+$groupManager = new GroupManager($studentManager);
+$students = $groupManager->getGroupStudents($groupName);
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,12 +16,12 @@ $students = $studentManager->getListStudent();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Student Management</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Group Students</title>
 </head>
 <body>
-<a href="view/add.php" class="button">Add Student</a>
-<form action="action/search.php" method="get">
+<a href="../view/add.php" class="button">Add Student</a>
+<form action="../action/search.php" method="get">
     <label for="keyword">
         <input type="text" id="keyword" name="keyword"
                placeholder="Search by name">
@@ -39,19 +43,19 @@ $students = $studentManager->getListStudent();
 
         <?php foreach ($students as $index => $student): ?>
             <tr>
-                <td><?php echo $index + 1 ?></td>
+                <td><?php echo $index ?></td>
                 <td>
-                    <a href="group/list-student.php?group=<?php echo $student->getGroup() ?>"><?php echo $student->getGroup() ?></a>
+                    <a href="../group/list-student.php?group=<?php echo $student->getGroup() ?>"><?php echo $student->getGroup() ?></a>
                 </td>
                 <td><?php echo $student->getName() ?></td>
                 <td><?php echo $student->getEmail() ?></td>
                 <td><?php echo $student->getPhone() ?></td>
-                <td><img src="<?php echo "upload/" . $student->getImage() ?>"
+                <td><img src="<?php echo "../upload/" . $student->getImage() ?>"
                          alt="" width="100"></td>
-                <td><a href="view/edit.php?index=<?php echo $index ?>"
+                <td><a href="../view/edit.php?index=<?php echo $index ?>"
                        class="editBtt">Edit</a>
                     <a onclick="return confirm('Are You Sure?')"
-                       href="action/delete.php?index=<?php echo $index ?>&img=<?php echo $student->getImage() ?>"
+                       href="../action/delete.php?index=<?php echo $index ?>&img=<?php echo $student->getImage() ?>"
                        class="delButton">Delete</a>
                 </td>
             </tr>
@@ -62,3 +66,4 @@ $students = $studentManager->getListStudent();
 </table>
 </body>
 </html>
+

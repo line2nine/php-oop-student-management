@@ -14,51 +14,61 @@ class StudentManager
     {
         $arrData = $this->getJSON();
         foreach ($arrData as $obj) {
-            $student = new Student($obj->name, $obj->email, $obj->phone);
+            $student = new Student($obj->name, $obj->email, $obj->phone,
+                $obj->image, $obj->group);
             array_push($this->listStudent, $student);
         }
         return $this->listStudent;
     }
 
-    public function addStudent($student)
+    public function addStudent(Student $student)
     {
-        $students = $this->getJSON();
+        $arrData = $this->getJSON();
         $data = [
             "name" => $student->getName(),
             "email" => $student->getEmail(),
-            "phone" => $student->getPhone()
+            "phone" => $student->getPhone(),
+            "image" => $student->getImage(),
+            "group" => $student->getGroup(),
         ];
-        array_push($students, $data);
-        $this->saveJSON($students);
+        array_push($arrData, $data);
+        $this->saveJSON($arrData);
     }
 
     public function editStudent($index, $data)
     {
-        $students = $this->getJSON();
+        $arrData = $this->getJSON();
+        // Cách edit khác:
 //        $data = [
-//            "name" => $student->setName($data),
-//            "email" => $student->setEmail($data),
-//            "phone" => $student->setPhone($data)
+//            "name" => $student->getName(),
+//            "email" => $student->getEmail(),
+//            "phone" => $student->getPhone(),
+//            "image" => $student->getImage()
 //        ];
-        $students[$index] = $data;
-        $this->saveJSON($students);
+        $arrData[$index] = $data;
+        $this->saveJSON($arrData);
     }
 
-    public function deleteStudent($index)
+    public function deleteStudent($index, $fileName)
     {
-        $students = $this->getJSON();
-        array_splice($students, $index, 1, null);
-        $this->saveJSON($students);
+        unlink("../upload/" . $fileName);
+        $arrData = $this->getJSON();
+        //unlink("../upload/" . $arrData[$index]->image); Cách 2: xóa file tại vị trí index trong json
+        array_splice($arrData, $index, 1, null);
+        $this->saveJSON($arrData);
     }
 
     public function searchStudent($keyword)
     {
-        $student = $this->getJSON();
+        $arrData = $this->getJSON();
         $arr = [];
-        foreach ($student as $item) {
-            if (strpos(strtolower($item->name), strtolower($keyword)) !== false ||
-                strpos(strtolower($item->email), strtolower($keyword)) !== false ||
-                strpos(strtolower($item->phone), strtolower($keyword)) !== false) {
+        foreach ($arrData as $item) {
+            if (strpos(strtolower($item->name), strtolower($keyword)) !== false
+                || strpos(strtolower($item->email), strtolower($keyword))
+                !== false
+                || strpos(strtolower($item->phone), strtolower($keyword))
+                !== false
+            ) {
                 array_push($arr, $item);
             }
         }
@@ -68,7 +78,9 @@ class StudentManager
     public function getStudentByIndex($index)
     {
         $arrData = $this->getJSON();
-        $student = new Student($arrData[$index]->name, $arrData[$index]->email, $arrData[$index]->phone);
+        $student = new Student($arrData[$index]->name, $arrData[$index]->email,
+            $arrData[$index]->phone, $arrData[$index]->image,
+            $arrData[$index]->group);
         array_push($this->listStudent, $student);
         return $this->listStudent;
     }

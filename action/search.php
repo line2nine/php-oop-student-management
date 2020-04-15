@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $studentManager = new StudentManager("../data/data.json");
 
     $students = $studentManager->searchStudent($keyword);
+    $std = $studentManager->getListStudent();
 }
 ?>
 <!doctype html>
@@ -25,9 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <a href="../view/add.php" class="button">Add Student</a>
 <form action="../action/search.php" method="post">
     <label for="keyword">
-        <input type="text" id="keyword" name="keyword" placeholder="Search by name">
+        <input type="text" id="keyword" name="keyword"
+               placeholder="Search by name">
     </label>
-    <input type="submit" class="buttonSearch">
+    <button type="submit" class="buttonSearch">SEARCH</button>
 </form>
 <table class="TableList">
     <tr>
@@ -40,18 +42,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     <?php if (isset($students)): ?>
 
-            <?php foreach ($students as $index => $student): ?>
-                <tr>
-                    <td><?php echo $index ?></td>
-                    <td><?php echo $student->name ?></td>
-                    <td><?php echo $student->email ?></td>
-                    <td><?php echo $student->phone ?></td>
-                    <td><a href="../view/edit.php?index=<?php echo $index ?>" class="editBtt">Edit</a>
-                        <a onclick="return confirm('Are You Sure?')"
-                           href="../action/delete.php?index=<?php echo $index ?>" class="delButton">Delete</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
+        <?php foreach ($students as $index => $student): ?>
+            <tr>
+                <td><?php echo $index ?></td>
+                <td><?php echo $student->name ?></td>
+                <td><?php echo $student->email ?></td>
+                <td><?php echo $student->phone ?></td>
+                <td><a href="../view/edit.php?index=<?php echo $index ?>"
+                       class="editBtt">Edit</a>
+                    <a onclick="return confirm('Are You Sure?')"
+                       href="../action/delete.php?index=<?php echo $index ?>"
+                       class="delButton">Delete</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
 
     <?php endif; ?>
 </table>
